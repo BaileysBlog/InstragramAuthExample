@@ -35,19 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public Login(data?:any): void
   { 
-    var value = this.LoginForm.value;
-    this.Loading = true;
-    this.LoginForm.disable();
-
-    setTimeout(() =>
-    {
-      this.Loading = false;
-      this.ResetForm();
-      
-      this.toast.openSnackBar("Login Successful", null, 5);
-      this.auth.Login(null, null);
-    }, 5000);
-
+    
   }
 
 
@@ -55,6 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   {
     this.UI.SetIncludeSideNav(false);
     this.initForm();
+    this.LoginForm.disable();
   }
   ngOnDestroy()
   { 
