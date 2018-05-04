@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public LoginForm: FormGroup;
   public Loading: boolean;
 
-  constructor(private UI:UIService, private toast: SnackBarService, private auth: AuthService) 
+  constructor(public UI:UIService, private toast: SnackBarService, private auth: AuthService) 
   {
 
   }
@@ -36,6 +36,19 @@ export class LoginComponent implements OnInit, OnDestroy {
   public Login(data?:any): void
   { 
     
+  }
+
+  public InstagramLogin():void
+  {
+    //https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=http://localhost:4200/login/instagram&response_type=token
+    window.open(this.GetInstagramAuth(), "_self", null, null);
+  }
+
+  private GetInstagramAuth(): string
+  { 
+    const client_id: string = "90102be692364d3f95f3cea51e510e1a";
+    let redirect_uri = "http://localhost:4200/";
+    return `https://api.instagram.com/oauth/authorize/?client_id=${client_id}&redirect_uri=${redirect_uri}login/instagram&response_type=token`;
   }
 
 

@@ -1,8 +1,9 @@
 import { Injectable, ElementRef, ViewChild, HostListener } from "@angular/core";
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatIconRegistry } from "@angular/material";
 import { Router, NavigationEnd } from "@angular/router";
+import { DomSanitizer } from "@angular/platform-browser";
 
-
+import 'rxjs/add/operator/filter';
 
 
 @Injectable()
@@ -12,19 +13,32 @@ export class UIService
     NavBarHeight: number;
     BodyHeight: number;
     public FullHeight: number = 0;
+    public CurrentRoute: string;
+    public PreviousRoute: string;
 
     IncludeSideNav: boolean = true;
 
-    constructor(private Nav:Router)
+    constructor(private Nav: Router, private iconRegistry: MatIconRegistry, private sanitizer: DomSanitizer)
     {
-        Nav.events.subscribe(event =>
-        {
-            if (event instanceof NavigationEnd)
-            { 
+        Nav.events
+            .filter(event => event instanceof NavigationEnd)
+            .subscribe((e: NavigationEnd) =>
+            {
+                this.PreviousRoute = this.CurrentRoute;
+                this.CurrentRoute = e.url;
+
                 this.ShowSideNav = false;
                 window.dispatchEvent(new Event("resize"));
-            }    
-        });
+            });
+
+        this.ConfigureIcons();
+    }
+
+    private ConfigureIcons(): void
+    {
+        this.iconRegistry.addSvgIcon(
+            'instagram',
+            this.sanitizer.bypassSecurityTrustResourceUrl('../assets/instagram_icon.svg'));
     }
 
     public GetIncludeSideNav(): boolean

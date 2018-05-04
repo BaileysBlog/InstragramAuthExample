@@ -5,6 +5,10 @@ export class AuthService {
 
   _IsAuthenticated: boolean;
 
+  _InstagramAccessToken: string;
+
+
+
   constructor() { }
 
   public IsAuthenticated(): boolean
@@ -17,6 +21,7 @@ export class AuthService {
     if (this.IsAuthenticated())
     { 
       this._IsAuthenticated = false;
+      this.SetInstagramAccessToken(null);
     }  
   }
 
@@ -25,5 +30,13 @@ export class AuthService {
     this._IsAuthenticated = true;
   }
 
+  public SetInstagramAccessToken(token: string): void
+  { 
+    this._InstagramAccessToken = token;
+    if (token)
+    { 
+      this._IsAuthenticated = true;
+    }  
+  }
 
 }

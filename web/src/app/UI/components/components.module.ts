@@ -8,11 +8,13 @@ import { MaterialModule } from '../../Material Design/material.module';
 import { FullHeightDirective } from './full-height.directive';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { InstagramAuthComponent } from './instagram-auth/instagram-auth.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, HomeComponent, FullHeightDirective],
-  imports: [NgbModule, ReactiveFormsModule, MaterialModule, CommonModule],
+  declarations: [LoginComponent, HomeComponent, FullHeightDirective, InstagramAuthComponent],
+  imports: [NgbModule, ReactiveFormsModule,RouterModule,MaterialModule, CommonModule],
   exports:[FullHeightDirective]
 })
 export class ComponentsModule { }

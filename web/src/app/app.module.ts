@@ -20,6 +20,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ComponentsModule } from './UI/components/components.module';
 import { UIService } from './_Services/ui.service';
 import { AuthService } from './_Services/auth.service';
+import { InstagramService } from './_Services/instagram.service';
+import { HttpClient } from 'selenium-webdriver/http';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -30,6 +33,7 @@ import { AuthService } from './_Services/auth.service';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     AppRoutingModule,
     NgbModule.forRoot(),
     ReactiveFormsModule,
@@ -38,7 +42,7 @@ import { AuthService } from './_Services/auth.service';
     MaterialModule,
     ComponentsModule
   ],
-  providers: [CheckForUpdateService,LogUpdateService, PromptUpdateService, SnackBarService, UIService,AuthService],
+  providers: [CheckForUpdateService,LogUpdateService, PromptUpdateService, SnackBarService, UIService,AuthService, InstagramService],
   bootstrap: [AppComponent]
 })
 export class AppModule
